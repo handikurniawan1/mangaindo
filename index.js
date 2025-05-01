@@ -54,9 +54,9 @@ app.get('/scrape-chapters', async (req, res) => {
   }
 });
 
-// Cron job setiap 22 menit untuk update manga
-cron.schedule('*/22 * * * *', async () => {
-  console.log('⏰ Cron Job: Scraping otomatis setiap 22 menit...');
+// Cron job untuk update manga setiap jam 7 pagi
+cron.schedule('0 7 * * *', async () => {
+  console.log('⏰ Cron Job: Scraping otomatis jam 7 pagi...');
   try {
     const mangaList = await scrapeKomiku();
     await mangaController.saveMangasToDB(mangaList);
@@ -66,11 +66,11 @@ cron.schedule('*/22 * * * *', async () => {
   }
 });
 
-// Cron job untuk update chapter setiap 30 menit
+// Cron job untuk update chapter setiap jam 8 pagi
 const chapterQueue = new PQueue({ concurrency: 1 });
 
-cron.schedule('*/30 * * * *', () => {
-  console.log('⏰ Cron Job: Menambahkan task scrape chapter ke antrian...');
+cron.schedule('0 8 * * *', () => {
+  console.log('⏰ Cron Job: Menambahkan task scrape chapter ke antrian jam 8 pagi...');
 
   chapterQueue.add(async () => {
     console.log('🚀 Mulai scraping CHAPTER...');
