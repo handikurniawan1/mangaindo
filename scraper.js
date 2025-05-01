@@ -1,4 +1,3 @@
-// scraper.js
 import puppeteer from 'puppeteer';
 
 export const scrapeKomiku = async () => {

@@ -1,7 +1,10 @@
 import puppeteer from 'puppeteer';
 
 const scrapeChapters = async (mangaLink) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true, // atau 'new', tergantung kebutuhan
+    args: ['--no-sandbox', '--disable-setuid-sandbox'] // Tambahkan args ini
+  });
   const page = await browser.newPage();
   await page.goto(mangaLink, { waitUntil: 'domcontentloaded' });
 
@@ -67,5 +70,6 @@ const scrapeChapters = async (mangaLink) => {
   await browser.close();
   return enrichedChapters;
 };
+
 
 export default scrapeChapters;
