@@ -2,7 +2,11 @@
 import puppeteer from 'puppeteer';
 
 export const scrapeKomiku = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
   const page = await browser.newPage();
   await page.goto('https://komiku.id/pustaka/?orderby=meta_value_num&category_name=manga&genre=action&genre2=adventure&status=ongoing');
 
